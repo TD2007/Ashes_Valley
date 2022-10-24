@@ -49,7 +49,12 @@ public class AnimationPlayer : MonoBehaviour
     }
 
     void Attack() {
-
+        if(Input.GetKey(KeyCode.F)) {
+            anim.SetBool("LevelUp", true);
+        }
+        else {
+            anim.SetBool("LevelUp", false);
+        }
         // Spin Attack
         if(Input.GetKey(KeyCode.Mouse0) && Input.GetKey(KeyCode.Mouse1)) {
             anim.SetBool("SpinAttack", true);
