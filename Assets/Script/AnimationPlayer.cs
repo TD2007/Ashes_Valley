@@ -6,7 +6,7 @@ public class AnimationPlayer : MonoBehaviour
 {
     private Animator anim;
     float playerHeight = 2;
-     bool grounded;
+    bool grounded;
 
     public LayerMask whatIsGround;
     public Transform player;
@@ -24,17 +24,10 @@ public class AnimationPlayer : MonoBehaviour
         Move();
         Attack();
         // CheckAttackState();
-
+ 
     }
 
     void Move() {
-        // if(Input.GetKeyDown(KeyCode.Space) && grounded) {
-        //     anim.SetBool("IsJump", true);
-        // }
-        // else {
-        //     anim.SetBool("IsJump", false);
-        // }
-        
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
             anim.SetFloat("Speed", 0.5f);
             if(Input.GetKey(KeyCode.LeftShift)) {
@@ -46,6 +39,10 @@ public class AnimationPlayer : MonoBehaviour
         }
        
         
+    } 
+
+    public void Die() {
+        anim.SetBool("SpinAttack", true);
     }
 
     void Attack() {
