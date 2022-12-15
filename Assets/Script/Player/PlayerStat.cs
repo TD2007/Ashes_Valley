@@ -16,6 +16,7 @@ public class PlayerStat : CharacterStats
     // Update is called once per frame
     void Update()
     {
+        healthBar.SetHealth(currentHealth);
         if(Input.GetKeyDown(KeyCode.M)) {
             TakeDamage(50);
         }
