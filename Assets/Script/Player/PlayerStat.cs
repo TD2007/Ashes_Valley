@@ -6,7 +6,7 @@ public class PlayerStat : CharacterStats
 {
     // Start is called before the first frame update
     public HealthBar healthBar;
-    public StaminaBar staminaBar;
+    StaminaBar staminaBar;
 
     public int maxStamina = 200;
     public int currentStamina;
@@ -15,7 +15,7 @@ public class PlayerStat : CharacterStats
     {
         anim = GetComponent<Animator>();
         healthBar.SetHealth(maxHealth);
-        staminaBar.SetMaxStamina(maxStamina);
+        // staminaBar.SetMaxStamina(maxStamina);
         currentStamina = maxStamina;
     }
 
@@ -28,7 +28,7 @@ public class PlayerStat : CharacterStats
             ReduceStamina(100);
         }
 
-        RestoreStamina(1);
+        // RestoreStamina(1);
         if(isDeath) {
             anim.SetBool("IsDeath", true);
         }
@@ -44,7 +44,7 @@ public class PlayerStat : CharacterStats
         if(currentStamina < maxStamina) {
             currentStamina += stamina;
         }
-        staminaBar.SetStamina(currentStamina);
+        // staminaBar.SetStamina(currentStamina);
     }
 
     private void OnTriggerEnter(Collider other) {
