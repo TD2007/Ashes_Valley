@@ -36,6 +36,8 @@ public class PlayerControl : MonoBehaviour
 
     Rigidbody rb;
 
+    public PlayerStat playerStat;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,9 +50,11 @@ public class PlayerControl : MonoBehaviour
     {
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.5f, whatIsGround);
-
-        MyInput();
-        SpeedControl();
+        
+        if(!playerStat.isDeath) {
+            MyInput();
+            SpeedControl();
+        }
 
         // handle drag
         if (grounded) {

@@ -6,16 +6,19 @@ public class PlayerStat : CharacterStats
 {
     // Start is called before the first frame update
     public HealthBar healthBar;
-    StaminaBar staminaBar;
+    public StaminaBar staminaBar;
 
     public int maxStamina = 200;
     public int currentStamina;
+    float timer = 0;
+    
     Animator anim;
     void Start()
     {
+        maxHealth = 100;
         anim = GetComponent<Animator>();
         healthBar.SetHealth(maxHealth);
-        // staminaBar.SetMaxStamina(maxStamina);
+        staminaBar.SetMaxStamina(maxStamina);
         currentStamina = maxStamina;
     }
 
@@ -24,19 +27,19 @@ public class PlayerStat : CharacterStats
     {
         healthBar.SetHealth(currentHealth);
 
-        if(Input.GetKeyDown(KeyCode.M)) {
-            ReduceStamina(100);
-        }
-
-        // RestoreStamina(1);
+        RestoreStamina(1);
         if(isDeath) {
             anim.SetBool("IsDeath", true);
         }
+        
+        timer += Time.deltaTime;
     }
 
-    void ReduceStamina(int stamina) {
-        if(currentStamina > stamina) {
+    public void ReduceStamina(int stamina, float countdown) {
+        
+        if(currentStamina > stamina & timer > countdown) {
             currentStamina -= stamina;
+            timer = 0;
         }
     }
 
@@ -44,7 +47,7 @@ public class PlayerStat : CharacterStats
         if(currentStamina < maxStamina) {
             currentStamina += stamina;
         }
-        // staminaBar.SetStamina(currentStamina);
+        staminaBar.SetStamina(currentStamina);
     }
 
     private void OnTriggerEnter(Collider other) {

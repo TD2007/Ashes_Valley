@@ -5,8 +5,10 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     // Health
-	public int maxHealth = 100;
+	public int maxHealth;
 	public int currentHealth;
+
+	public int attackDamage = 10;
 
 	public bool isDeath = false;
 	public Stat damage;
