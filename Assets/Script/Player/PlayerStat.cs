@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +8,15 @@ public class PlayerStat : CharacterStats
     public HealthBar healthBar;
     public StaminaBar staminaBar;
 
-    public int maxStamina = 200;
-    public int currentStamina;
+    int maxStamina = 200;
+    int currentStamina;
+    
+    public int level = 1;
     float timer = 0;
     
     Animator anim;
+
+    public EnemyStat enemyStat;
     void Start()
     {
         maxHealth = 100;
@@ -51,6 +55,7 @@ public class PlayerStat : CharacterStats
     }
 
     private void OnTriggerEnter(Collider other) {
+
         if(other.tag == "Enemy") {
             TakeDamage(10);
         }

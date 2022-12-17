@@ -26,6 +26,8 @@ public class PlayerAnimation : MonoBehaviour
         Move();
         Attack();
         CheckAttackState();
+
+
  
     }
 
@@ -34,6 +36,7 @@ public class PlayerAnimation : MonoBehaviour
             anim.SetFloat("Speed", 0.5f);
             if(Input.GetKey(KeyCode.LeftShift)) {
                 anim.SetFloat("Speed", 1.0f);
+                playerStat.ReduceStamina(2, 0);
             }
         }
         else {
@@ -54,7 +57,7 @@ public class PlayerAnimation : MonoBehaviour
         // Spin Attack
         if(Input.GetKeyDown(KeyCode.LeftControl)) {
             anim.SetBool("SpinAttack", true);
-            playerStat.ReduceStamina(100, 3);
+            playerStat.ReduceStamina(100, 0.5f);
             
         }
         else {
@@ -62,7 +65,7 @@ public class PlayerAnimation : MonoBehaviour
             // Heavy Attack
             if(Input.GetKeyDown(KeyCode.Mouse1)) {
                 anim.SetBool("HeavyAttack", true);
-                playerStat.ReduceStamina(50, 2);
+                playerStat.ReduceStamina(50, 1);
             }
             else {
                 anim.SetBool("HeavyAttack", false);
@@ -70,11 +73,11 @@ public class PlayerAnimation : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.Mouse0)) {
                     if(anim.GetCurrentAnimatorStateInfo(0).IsName("LightAttack1")) {
                         anim.SetBool("LightAttack2", true);
-                        playerStat.ReduceStamina(10, 0.5f);
+                        playerStat.ReduceStamina(10, 0.2f);
                     }
                     else {
                         anim.SetBool("LightAttack1", true);
-                        playerStat.ReduceStamina(10, 0.5f);
+                        playerStat.ReduceStamina(10, 0.2f);
                     }
 
                 }
@@ -91,6 +94,7 @@ public class PlayerAnimation : MonoBehaviour
             anim.SetBool("LightAttack2", false);
         }
     }
+
 
 
 
