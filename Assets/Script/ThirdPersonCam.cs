@@ -9,6 +9,8 @@ public class ThirdPersonCam : MonoBehaviour
     public Transform playerObj;
     public float rotationSpeed = 7f;
 
+    public PlayerStat playerStat;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,15 +20,18 @@ public class ThirdPersonCam : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-        orientation.forward = viewDir.normalized;
+        if(playerStat.isDeath == false) {
 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 inputDir = orientation.forward * vertical + orientation.right * horizontal;
+            Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+            orientation.forward = viewDir.normalized;
 
-        if(inputDir != Vector3.zero) {
-            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            Vector3 inputDir = orientation.forward * vertical + orientation.right * horizontal;
+
+            if(inputDir != Vector3.zero) {
+                playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+            }
         }
     }
 }

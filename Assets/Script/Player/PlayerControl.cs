@@ -67,7 +67,9 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if(playerStat.currentStamina >= 2) {
+            MovePlayer();
+        }
     }
 
     private void MyInput()

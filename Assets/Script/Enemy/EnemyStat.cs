@@ -7,15 +7,12 @@ public class EnemyStat : CharacterStats
     // Start is called before the first frame update
     Animator anim;
 
-    PlayerStat playerStat;
-    public bool isEnemyAttack = false;
+    public PlayerStat playerStat;
 
-    BoxCollider box;
     void Start()
     {
         anim = GetComponent<Animator>();
-        box = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BoxCollider>();
-        box.enabled = !box.enabled;
+
     }
 
     // Update is called once per frame
@@ -28,22 +25,12 @@ public class EnemyStat : CharacterStats
             anim.SetBool("isDeath", true);
         }
 
-        CheckAttackState();
     }
 
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "WeaponPlayer") {
-            TakeDamage(10);
+            TakeDamage(playerStat.attackDamage);
         }
 
-    }
-
-    void CheckAttackState() {
-        if(anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-            isEnemyAttack = true;
-        }
-        else {
-            isEnemyAttack = false;
-        }
     }
 }

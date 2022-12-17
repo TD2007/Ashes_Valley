@@ -32,7 +32,7 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     void Move() {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) && playerStat.currentStamina >= 2) {
             anim.SetFloat("Speed", 0.5f);
             if(Input.GetKey(KeyCode.LeftShift)) {
                 anim.SetFloat("Speed", 1.0f);
@@ -48,14 +48,8 @@ public class PlayerAnimation : MonoBehaviour
 
 
     void Attack() {
-        if(Input.GetKey(KeyCode.F)) {
-            anim.SetBool("LevelUp", true);
-        }
-        else {
-            anim.SetBool("LevelUp", false);
-        }
         // Spin Attack
-        if(Input.GetKeyDown(KeyCode.LeftControl)) {
+        if(Input.GetKeyDown(KeyCode.LeftControl) && playerStat.currentStamina >= 100) {
             anim.SetBool("SpinAttack", true);
             playerStat.ReduceStamina(100, 0.5f);
             
@@ -63,7 +57,7 @@ public class PlayerAnimation : MonoBehaviour
         else {
             anim.SetBool("SpinAttack", false);
             // Heavy Attack
-            if(Input.GetKeyDown(KeyCode.Mouse1)) {
+            if(Input.GetKeyDown(KeyCode.Mouse1) && playerStat.currentStamina >= 50) {
                 anim.SetBool("HeavyAttack", true);
                 playerStat.ReduceStamina(50, 1);
             }

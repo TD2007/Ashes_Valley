@@ -8,22 +8,19 @@ public class PlayerStat : CharacterStats
     public HealthBar healthBar;
     public StaminaBar staminaBar;
 
-    int maxStamina = 200;
-    int currentStamina;
+    public int maxStamina = 200;
+    public int currentStamina;
     
     public int level = 1;
+    public int attackDamage;
+
     float timer = 0;
     
     Animator anim;
 
-    public EnemyStat enemyStat;
     void Start()
     {
-        maxHealth = 100;
-        anim = GetComponent<Animator>();
-        healthBar.SetHealth(maxHealth);
-        staminaBar.SetMaxStamina(maxStamina);
-        currentStamina = maxStamina;
+        InitialStat();
     }
 
     // Update is called once per frame
@@ -37,6 +34,15 @@ public class PlayerStat : CharacterStats
         }
         
         timer += Time.deltaTime;
+    }
+
+    void InitialStat() {
+        attackDamage = 20;
+        maxHealth = 100;
+        anim = GetComponent<Animator>();
+        healthBar.SetHealth(maxHealth);
+        staminaBar.SetMaxStamina(maxStamina);
+        currentStamina = maxStamina;
     }
 
     public void ReduceStamina(int stamina, float countdown) {
@@ -56,7 +62,7 @@ public class PlayerStat : CharacterStats
 
     private void OnTriggerEnter(Collider other) {
 
-        if(other.tag == "Enemy") {
+        if(other.tag == "WeaponEnemy") {
             TakeDamage(10);
         }
 
